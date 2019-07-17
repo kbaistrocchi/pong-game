@@ -1,10 +1,14 @@
 import {SVG_NS} from '../settings'
+import Board from './Board'
 
 export default class Game {
   constructor(element, width, height) {
     this.element = element;
     this.width = width;
     this.height = height;
+
+    // create a new instance of board 
+    this.board = new Board(this.width, this.height)
 
     // Other code goes here...
     this.gameElement = document.getElementById(this.element)
@@ -25,5 +29,8 @@ export default class Game {
 
     // append to HTML
     this.gameElement.appendChild(svg)
+
+    // call the render method on board
+    this.board.render(svg)
   }
 }
