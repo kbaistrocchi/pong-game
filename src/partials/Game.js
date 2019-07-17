@@ -1,5 +1,6 @@
 import {SVG_NS} from '../settings'
 import Board from './Board'
+import Paddle from './Paddles'
 
 export default class Game {
   constructor(element, width, height) {
@@ -7,11 +8,39 @@ export default class Game {
     this.width = width;
     this.height = height;
 
-    // create a new instance of board 
-    this.board = new Board(this.width, this.height)
+    // create paddle instances
+
+    // common Paddle dimensions
+    this.paddleWidth = 8
+    this.paddleHeight = 56
+    this.spaceFromWall = 10
+
+    // Player 1 paddle
+    this.player1 = new Paddle (
+      this.height,                              // boardHeight
+      this.paddleWidth,         
+      this.paddleHeight, 
+      this.spaceFromWall,                      // x position
+      ((this.height - this.paddleHeight) / 2)  // y position
+      )
+
+       // Player 2 paddle
+    this.player2 = new Paddle (
+      this.height,                                          // boardHeight
+      this.paddleWidth,         
+      this.paddleHeight, 
+      (this.width - this.paddleWidth - this.spaceFromWall),  // x position
+      ((this.height - this.paddleHeight) / 2)               // y position
+      )
+    
 
     // Other code goes here...
     this.gameElement = document.getElementById(this.element)
+
+    // create a new instance of board 
+    this.board = new Board(this.width, this.height)
+
+
   }
 
   render() {
@@ -32,5 +61,9 @@ export default class Game {
 
     // call the render method on board
     this.board.render(svg)
+
+    // call the render method on both paddles
+    this.player1.render(svg)
+    this.player2.render(svg)
   }
 }
