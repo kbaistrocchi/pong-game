@@ -1,4 +1,4 @@
-import {SVG_NS} from '../settings'
+import {SVG_NS, KEYS} from '../settings'
 import Board from './Board'
 import Paddle from './Paddles'
 
@@ -8,8 +8,11 @@ export default class Game {
     this.width = width;
     this.height = height;
 
-    // create paddle instances
+    // create a new instance of board 
+    this.board = new Board(this.width, this.height)
 
+    
+    // create paddle instances
     // common Paddle dimensions
     this.paddleWidth = 8
     this.paddleHeight = 56
@@ -21,7 +24,9 @@ export default class Game {
       this.paddleWidth,         
       this.paddleHeight, 
       this.spaceFromWall,                      // x position
-      ((this.height - this.paddleHeight) / 2)  // y position
+      ((this.height - this.paddleHeight) / 2),  // y position
+      KEYS.a,                                  // up KEY
+      KEYS.z                                   // down KEY
       )
 
        // Player 2 paddle
@@ -30,15 +35,14 @@ export default class Game {
       this.paddleWidth,         
       this.paddleHeight, 
       (this.width - this.paddleWidth - this.spaceFromWall),  // x position
-      ((this.height - this.paddleHeight) / 2)               // y position
+      ((this.height - this.paddleHeight) / 2),               // y position
+      KEYS.up,
+      KEYS.down
       )
     
 
-    // Other code goes here...
+      // location in html element to append all game items to
     this.gameElement = document.getElementById(this.element)
-
-    // create a new instance of board 
-    this.board = new Board(this.width, this.height)
 
 
   }
@@ -48,11 +52,9 @@ export default class Game {
     this.gameElement.innerHTML = ''
 
     // render/create the canvas for board (SVG element)
-    // use createElementNS for svg
     let svg = document.createElementNS(SVG_NS, 'svg')
 
-    svg.setAttributeNS(null, 'width', this.width)
-    // null because namespace is already called (SVG_NS), when saved svg variable
+    svg.setAttributeNS(null, 'width', this.width)  // null because namespace is already called (SVG_NS), when saved svg variable
     svg.setAttributeNS(null, 'height', this.height)
     svg.setAttributeNS(null, 'viewBox', `0 0 ${this.width} ${this.height}`)
 
