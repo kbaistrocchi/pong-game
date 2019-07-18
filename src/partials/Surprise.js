@@ -8,6 +8,7 @@ import {SVG_NS} from '../settings'
 
 
 // create svgs of different colours
+{/* <polygon points = "100,10 40,180 190,60 10,60 160,180" fill = "red"/> */}
 
 // create event listener or condition to trigger svg appearance (score?)
 
@@ -15,4 +16,6 @@ import {SVG_NS} from '../settings'
 
 // condition for if ball hits new svg, trigger changes
 
-// PURPLE
+// PURPLE >> find which player is winning(Math.max), subtract 2 pts
+// let winning player = 
+

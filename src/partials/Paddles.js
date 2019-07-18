@@ -11,7 +11,7 @@ export default class Paddle {
         this.speed = 10 // moves 10 pixels per click
         this.score = 0
 
-        document.addEventListener('keydown', (event) => {
+        document.addEventListener('keydown', (event) => {  // arrow function keeps local scope - otherwise need to bind this to that
             switch(event.key) {
                 case up: this.y = Math.max(0, this.y - this.speed) //Math.max picks the largest of the numbers
                 break
@@ -20,6 +20,16 @@ export default class Paddle {
             }
         })
     }
+    // get coordinates of paddles
+    coordinats(x, y, width, height) {
+        // get left  and right x position of ONE paddle
+        let leftX = x
+        let rightX = x + width
+        let topY = y
+        let bottomY = y + height
+    }
+
+
 
     render(svg) {
         let rect = document.createElementNS(SVG_NS, 'rect')

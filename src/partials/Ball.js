@@ -28,9 +28,31 @@ export default class Ball {
         console.log('vy', this.vy)
     }
 
+    wallCollision() {
+        // if ball hits top or bottom then reverse  y direction (make  = -y)
+        const hitTop = this.y - this.radius <= 0
+        const hitBottom = this.y + this.radius >= this.boardHeight
+
+        if (hitTop || hitBottom) {
+            // change vector direction
+            this.vy = -this.vy
+        }
+
+        const hitLeft = this.x - this.radius <= 0
+        const hitRight = this.x + this.radius >= this.boardWidth
+
+        if (hitLeft || hitRight) {
+            this.vx = -this.vx
+        }
+    }
+
     render(svg) {
         this.x += this.vx
         this.y += this.vy 
+
+        // add in wallCollision() because always on loop and always checking to see
+        // if the ball has his the wall
+        this.wallCollision()
 
         let circle = document.createElementNS(SVG_NS, 'circle')
         circle.setAttributeNS(null, 'r', this.radius)
