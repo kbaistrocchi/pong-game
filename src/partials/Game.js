@@ -2,6 +2,7 @@ import {SVG_NS, KEYS} from '../settings'
 import Board from './Board'
 import Paddle from './Paddles'
 import Ball from './Ball'
+import Surprise from './Surprise'
 
 export default class Game {
   constructor(element, width, height) {
@@ -44,6 +45,12 @@ export default class Game {
       // create instance of ball (radius, boardWidth, boardHeight)
       this.radius = 8
       this.ball = new Ball (this.radius, this.width, this.height)
+
+
+      this.xPosition = 150
+      this.yPosition = 150
+      // create instance of star
+      this.surprise = new Surprise (this.xPosition, this.yPosition)
     
 
       // location in html element to append all game items to
@@ -61,6 +68,8 @@ export default class Game {
          
       })
 
+      
+
 
 
   }
@@ -74,7 +83,6 @@ export default class Game {
       return 
     }
 
-
     // clear board
     this.gameElement.innerHTML = ''
 
@@ -85,7 +93,7 @@ export default class Game {
     svg.setAttributeNS(null, 'height', this.height)
     svg.setAttributeNS(null, 'viewBox', `0 0 ${this.width} ${this.height}`)
 
-    // append to HTML
+    // append svg to game canvas
     this.gameElement.appendChild(svg)
 
     // call the render method on board
@@ -97,7 +105,11 @@ export default class Game {
 
     // render the ball ... add ball arguments player1 and 2
     this.ball.render(svg, this.player1, this.player2)
-    console.log(this.player1)
+    // console.log(this.player1)
+
+    // render the surprise!
+    this.surprise.render(svg)
+    
 
   
 
