@@ -2,6 +2,7 @@ import {SVG_NS, KEYS} from '../settings'
 import Board from './Board'
 import Paddle from './Paddles'
 import Ball from './Ball'
+import Score from './Score'
 import Surprise from './Surprise'
 
 export default class Game {
@@ -45,6 +46,11 @@ export default class Game {
       // create instance of ball (radius, boardWidth, boardHeight)
       this.radius = 8
       this.ball = new Ball (this.radius, this.width, this.height)
+
+      // create new instance of Score Board
+      this.score1 = new Score ((this.width/2 - 50), 30, 30)
+      this.score2 = new Score ((this.width/2 + 25), 30, 30)
+
 
 
       this.xPosition = 150
@@ -107,8 +113,12 @@ export default class Game {
     this.ball.render(svg, this.player1, this.player2)
     // console.log(this.player1)
 
+    // render score boards
+    this.score1.render(svg, this.player1.score)
+    this.score2.render(svg, this.player2.score)
+
     // render the surprise!
-    this.surprise.render(svg)
+    // this.surprise.render(svg)
     
 
   

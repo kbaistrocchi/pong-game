@@ -1,4 +1,8 @@
 import {SVG_NS} from '../settings'
+import pingSound from "../../public/sounds/pong-01.wav";
+import pingSound2 from "../../public/sounds/pong-02.wav";
+import pingSound3 from "../../public/sounds/pong-03.wav";
+import pingSound4 from "../../public/sounds/pong-04.wav";
 
 export default class Ball {
     constructor (radius, boardWidth, boardHeight) {
@@ -6,6 +10,10 @@ export default class Ball {
         this.boardWidth = boardWidth
         this.boardHeight = boardHeight
         this.direction = 1
+        this.ping = new Audio(pingSound) 
+        this.ping2 = new Audio(pingSound2)
+        this.ping3 = new Audio(pingSound3)
+        this.ping4 = new Audio(pingSound4)
         
         this.reset()
     }
@@ -36,6 +44,7 @@ export default class Ball {
         if (hitTop || hitBottom) {
             // change vector direction
             this.vy = -this.vy
+            this.ping.play()
         }
 
         const hitLeft = this.x - this.radius <= 0
@@ -43,6 +52,7 @@ export default class Ball {
 
         if (hitLeft || hitRight) {
             this.vx = -this.vx
+            this.ping.play()
         }
     }
 
@@ -62,6 +72,7 @@ export default class Ball {
             ) {
                 // then change the x direction of the ball
                 this.vx = -this.vx
+                this.ping2.play()
             }
             
         }
@@ -76,9 +87,17 @@ export default class Ball {
                 && (this.y >= topY && this.y <= bottomY)
             ) {
                 this.vx = -this.vx
+                this.ping2.play()
             }
                 
         }
+    }
+
+    goal(player) {
+        // happens when a goal is scored
+        player.score++
+        this.reset()
+        console.log(player.score)
     }
 
 
@@ -91,6 +110,8 @@ export default class Ball {
         this.wallCollision()
         this.paddleCollision(player1, player2)
 
+      
+
         let circle = document.createElementNS(SVG_NS, 'circle')
         circle.setAttributeNS(null, 'r', this.radius)
         circle.setAttributeNS(null, 'fill', '#fff')
@@ -98,6 +119,22 @@ export default class Ball {
         circle.setAttributeNS(null, 'cy', this.y)
 
         svg.appendChild(circle)
+
+          // is a goal being scored
+          const rightGoal = this.x + this.radius >= this.boardWidth  //ball hitting right side
+          const leftGoal = this.x - this.radius <= 0
+  
+          if (rightGoal) {
+              // call goal method to increase score
+              this.goal(player1)
+              // change directin of ball
+              this.direction = 1
+          }
+          else if (leftGoal) {
+              this.goal(player2)
+              this.direction = -1
+          }
+
     }
 }
 
