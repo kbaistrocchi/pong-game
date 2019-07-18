@@ -46,13 +46,50 @@ export default class Ball {
         }
     }
 
-    render(svg) {
+    paddleCollision(player1, player2) {
+        // if vx is +, then moving to the right and going to hit player2 paddle
+        // Player 2 Paddle
+        if (this.vx > 0) {
+            // need player2 coordinates from Paddles.js
+            let paddle = player2.coordinates(player2.x, player2.y, player2.width, player2.height)
+            let [leftX, rightX, topY, bottomY] = paddle
+            // if balls y is greater or less than paddles' y, then goal
+            if (
+                // check left side of Player 2 paddle
+                (this.x + this.radius >= leftX)
+                && (this.x + this.radius <= rightX)
+                && (this.y >= topY && this.y <= bottomY)
+            ) {
+                // then change the x direction of the ball
+                this.vx = -this.vx
+            }
+            
+        }
+        // Player 1 Paddle
+        else {
+            let paddle = player1.coordinates(player1.x, player1.y, player1.width, player1.height)
+            let [leftX, rightX, topY, bottomY] = paddle
+            if (
+                // check right side of Player 1 paddle
+                (this.x - this.radius >= leftX)
+                && (this.x - this.radius <= rightX)
+                && (this.y >= topY && this.y <= bottomY)
+            ) {
+                this.vx = -this.vx
+            }
+                
+        }
+    }
+
+
+    render(svg, player1, player2) {
         this.x += this.vx
         this.y += this.vy 
 
         // add in wallCollision() because always on loop and always checking to see
         // if the ball has his the wall
         this.wallCollision()
+        this.paddleCollision(player1, player2)
 
         let circle = document.createElementNS(SVG_NS, 'circle')
         circle.setAttributeNS(null, 'r', this.radius)

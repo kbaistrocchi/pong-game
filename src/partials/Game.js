@@ -95,8 +95,11 @@ export default class Game {
     this.player1.render(svg)
     this.player2.render(svg)
 
-    // render the ball
-    this.ball.render(svg)
+    // render the ball ... add ball arguments player1 and 2
+    this.ball.render(svg, this.player1, this.player2)
+    console.log(this.player1)
+
+  
 
 
   }

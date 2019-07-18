@@ -21,12 +21,13 @@ export default class Paddle {
         })
     }
     // get coordinates of paddles
-    coordinats(x, y, width, height) {
+    coordinates(x, y, width, height) {
         // get left  and right x position of ONE paddle
         let leftX = x
         let rightX = x + width
         let topY = y
         let bottomY = y + height
+        return [leftX, rightX, topY, bottomY]
     }
 
 
