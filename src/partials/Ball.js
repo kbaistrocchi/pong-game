@@ -100,9 +100,16 @@ export default class Ball {
         // console.log(player.score)
     }
 
+    minusGoal(player1, player2) {
+        console.log("P1", player1.score)
+        console.log("P2", player2.score)
+        // player.score = player.score - 2
+        // this.reset()
+    }
+
 
     // Star Collision
-    starCollision(star) {
+    starCollision(star, player1, player2) {
         // this.x and this.y are ball coordinates
         // need star coordinates
         let starArea = [star.x, star.y]
@@ -119,8 +126,10 @@ export default class Ball {
             ) {
                 console.log("direct hit!")
                 this.ping4.play()
+                this.minusGoal(player1, player2)
                 this.vx = 0
                 this.vy = 0
+                // run function to decrease score
             }
         
     }
@@ -134,7 +143,7 @@ export default class Ball {
         // if the ball has hit the wall
         this.wallCollision()
         this.paddleCollision(player1, player2)
-        this.starCollision(star)
+        this.starCollision(star, player1, player2)
 
       
 
