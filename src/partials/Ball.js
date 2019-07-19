@@ -97,7 +97,7 @@ export default class Ball {
         // happens when a goal is scored
         player.score++
         this.reset()
-        console.log(player.score)
+        // console.log(player.score)
     }
 
 
@@ -126,13 +126,17 @@ export default class Ball {
   
           if (rightGoal) {
               // call goal method to increase score
+              this.direction = -1
               this.goal(player1)
               // change directin of ball
-              this.direction = 1
+              
+            //   console.log('vx after goal', this.vx)
           }
           else if (leftGoal) {
-              this.goal(player2)
-              this.direction = -1
+            this.direction = 1
+            this.goal(player2)
+              
+            //   console.log('vx after goal', this.vx)
           }
 
     }

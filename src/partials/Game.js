@@ -22,14 +22,15 @@ export default class Game {
     this.spaceFromWall = 10
 
     // Player 1 paddle
+    //Paddle (boardHeight, width, height, x, y, up, down)
     this.player1 = new Paddle (
       this.height,                              // boardHeight
       this.paddleWidth,         
       this.paddleHeight, 
       this.spaceFromWall,                      // x position
       ((this.height - this.paddleHeight) / 2),  // y position
-      KEYS.a,                                  // up KEY
-      KEYS.z                                   // down KEY
+      // KEYS.a,                                  // up KEY
+      // KEYS.z                                   // down KEY
       )
 
        // Player 2 paddle
@@ -39,8 +40,8 @@ export default class Game {
       this.paddleHeight, 
       (this.width - this.paddleWidth - this.spaceFromWall),  // x position
       ((this.height - this.paddleHeight) / 2),               // y position
-      KEYS.up,
-      KEYS.down
+      // KEYS.up,
+      // KEYS.down
       )
 
       // create instance of ball (radius, boardWidth, boardHeight)
@@ -70,9 +71,34 @@ export default class Game {
           this.player2.speed = 10
           console.log("paused", this.pause)
           break
-        }
-         
+        }  
       })
+      // event listener for Player1 up and down paddle movement
+      document.addEventListener('keydown', (event) => {  // arrow function keeps global scope - otherwise need to bind this to that
+            console.log(event.key)
+            // console.log(this.player1)
+            if (event.key === 'a') {
+              this.player1.y = Math.max(0, this.player1.y - this.player1.speed)
+            }
+            else if (event.key === 'z') {
+              this.player1.y = Math.min(this.height - this.player1.height, this.player1.y + this.player1.speed)
+            }
+            else {
+              event.preventDefault()
+            }
+        })
+
+        // event listener for Player2 up and down paddle movement
+      document.addEventListener('keydown', (event) => {  
+        console.log(event.key)
+        console.log(this.player2)
+        if (event.key === 'ArrowUp') {
+          this.player2.y = Math.max(0, this.player2.y - this.player2.speed)
+        }
+        else if (event.key === 'ArrowDown') {
+          this.player2.y = Math.min(this.height - this.player2.height, this.player2.y + this.player2.speed)
+        }
+    })
 
       
 
@@ -109,6 +135,12 @@ export default class Game {
     this.player1.render(svg)
     this.player2.render(svg)
 
+    // // TRYING TO FIX PADDLES
+    // this.player1.movePaddles(this.player1)
+
+
+
+
     // render the ball ... add ball arguments player1 and 2
     this.ball.render(svg, this.player1, this.player2)
     // console.log(this.player1)
@@ -118,7 +150,7 @@ export default class Game {
     this.score2.render(svg, this.player2.score)
 
     // render the surprise!
-    // this.surprise.render(svg)
+    this.surprise.render(svg)
     
 
   

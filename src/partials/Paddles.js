@@ -11,14 +11,15 @@ export default class Paddle {
         this.speed = 10 // moves 10 pixels per click
         this.score = 0
 
-        document.addEventListener('keydown', (event) => {  // arrow function keeps local scope - otherwise need to bind this to that
-            switch(event.key) {
-                case up: this.y = Math.max(0, this.y - this.speed) //Math.max picks the largest of the numbers
-                break
-                case down: this.y = Math.min(this.boardHeight - this.height, this.y + this.speed)
-                break
-            }
-        })
+        // document.addEventListener('keydown', (event) => {  // arrow function keeps global scope - otherwise need to bind this to that
+        //     console.log(event)
+        //     switch(event.key) {
+        //         case up: this.y = Math.max(0, this.y - this.speed) //Math.max picks the largest of the numbers
+        //         break
+        //         case down: this.y = Math.min(this.boardHeight - this.height, this.y + this.speed)
+        //         break
+        //     }
+        // })
     }
     // get coordinates of paddles
     coordinates(x, y, width, height) {
@@ -30,6 +31,20 @@ export default class Paddle {
         return [leftX, rightX, topY, bottomY]
     }
 
+    // movePaddles(player) {
+    //     // let player1 = player
+    //     // let player2 = player
+    //     if (player === this.player1) {
+    //         document.addEventListener('keydown', function(event) {
+    //             console.log("event key", event.key)
+    //         })
+    //     }
+    //     else if (player === this.player2) {
+    //         document.addEventListener('keydown', function(event) {
+    //             console.log(event.key)
+    //         })
+    //     }
+    // }
 
 
     render(svg) {

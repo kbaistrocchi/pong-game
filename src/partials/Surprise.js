@@ -8,7 +8,7 @@ import {SVG_NS} from '../settings'
 
 
 // create svgs of different colours
-/* <polygon points = "100,10 40,180 190,60 10,60 160,180" fill = "red"/> */
+
 // <!-- <g transform="translate(20, 20)"> -->
 // 				<!-- star -->
 // 				<!-- <polygon points = "0,8 20,8 4,20 10,0 16,20" fill = "red"/>
@@ -22,7 +22,7 @@ export default class Surprise {
 
     render(svg) {
         let group = document.createElementNS(SVG_NS, 'g')
-        group.setAttributeNS(null, 'tranform', 'translate' + (this.x, this.y))
+        group.setAttributeNS(null, 'tranform', `translate(${this.x}, ${this.y})`)
         let star = document.createElementNS(SVG_NS, 'polygon')
         star.setAttributeNS(null, 'fill', 'yellow')
         star.setAttributeNS(null, 'points', "0,8 20,8 4,20 10,0 16,20")
