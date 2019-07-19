@@ -94,10 +94,8 @@ export default class Ball {
     }
 
     goal(player) {
-        // happens when a goal is scored
         player.score++
         this.reset()
-        // console.log(player.score)
     }
 
     minusGoal(player1, player2) {
@@ -106,16 +104,13 @@ export default class Ball {
         console.log("P1", player1.score)
         console.log("P2", player2.score)
         if (player1.score === player2.score) {
-            console.log("tie game, no change")
             return
         }
         else if (winningScore === player1.score) {
-            console.log("P1 lost 2 pts")
             player1.score = player1.score - 2
             return
         }
         else if (winningScore === player2.score) {
-            console.log("P1 lost 2 pts")
             player2.score = player2.score - 2
             return
         }
@@ -124,14 +119,6 @@ export default class Ball {
 
     // Star Collision
     starCollision(star, player1, player2) {
-        // this.x and this.y are ball coordinates
-        // need star coordinates
-        let starArea = [star.x, star.y]
-        [star.x, star.y] = starArea
-        console.log('ball x', this.x)
-        console.log('ball y', this.y)
-        console.log('star x', star.x)
-        console.log('star y', star.y)
         if (
             (this.x >= star.x - this.radius)
             && (this.x <= star.x + 20 + this.radius)
@@ -142,10 +129,9 @@ export default class Ball {
                 this.ping4.play()
                 this.vx = 0
                 this.vy = 0
-                this.minusGoal(player1, player2)
-                this.reset()
+                setInterval((this.minusGoal(player1, player2)), 2000)
+                setInterval((this.reset()), 3000)
                 star.starLocation()
-                
             }
         
     }
@@ -171,24 +157,18 @@ export default class Ball {
 
         svg.appendChild(circle)
 
-          // is a goal being scored
-          const rightGoal = this.x + this.radius >= this.boardWidth  //ball hitting right side
-          const leftGoal = this.x - this.radius <= 0
-  
-          if (rightGoal) {
-              // call goal method to increase score
-              this.direction = -1
-              this.goal(player1)
-              // change directin of ball
-              
-            //   console.log('vx after goal', this.vx)
-          }
-          else if (leftGoal) {
-            this.direction = 1
-            this.goal(player2)
-              
-            //   console.log('vx after goal', this.vx)
-          }
+        // goal variables
+        const rightGoal = this.x + this.radius >= this.boardWidth  //ball hitting right side
+        const leftGoal = this.x - this.radius <= 0
+
+        if (rightGoal) {
+            this.direction = -1
+            this.goal(player1)
+        }
+        else if (leftGoal) {
+        this.direction = 1
+        this.goal(player2)
+        }
 
     }
 }
