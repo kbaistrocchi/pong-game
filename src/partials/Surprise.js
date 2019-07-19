@@ -20,9 +20,13 @@ export default class Surprise {
         this.y = y
     }
 
+    // surpriseLocation() {
+    //     this.x = Math.random()
+    // }
+
     render(svg) {
         let group = document.createElementNS(SVG_NS, 'g')
-        group.setAttributeNS(null, 'tranform', `translate(${this.x}, ${this.y})`)
+        group.setAttributeNS(null, 'transform', `translate(${this.x}, ${this.y})`)
         let star = document.createElementNS(SVG_NS, 'polygon')
         star.setAttributeNS(null, 'fill', 'yellow')
         star.setAttributeNS(null, 'points', "0,8 20,8 4,20 10,0 16,20")

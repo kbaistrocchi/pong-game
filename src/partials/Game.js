@@ -21,7 +21,9 @@ export default class Game {
     this.paddleHeight = 56
     this.spaceFromWall = 10
 
-    // Player 1 paddle
+
+
+     // Player 1 paddle
     //Paddle (boardHeight, width, height, x, y, up, down)
     this.player1 = new Paddle (
       this.height,                              // boardHeight
@@ -29,8 +31,8 @@ export default class Game {
       this.paddleHeight, 
       this.spaceFromWall,                      // x position
       ((this.height - this.paddleHeight) / 2),  // y position
-      // KEYS.a,                                  // up KEY
-      // KEYS.z                                   // down KEY
+      KEYS.a,                                  // up KEY
+      KEYS.z                                   // down KEY
       )
 
        // Player 2 paddle
@@ -40,8 +42,8 @@ export default class Game {
       this.paddleHeight, 
       (this.width - this.paddleWidth - this.spaceFromWall),  // x position
       ((this.height - this.paddleHeight) / 2),               // y position
-      // KEYS.up,
-      // KEYS.down
+      KEYS.up,
+      KEYS.down
       )
 
       // create instance of ball (radius, boardWidth, boardHeight)
@@ -73,38 +75,69 @@ export default class Game {
           break
         }  
       })
-      // event listener for Player1 up and down paddle movement
-      document.addEventListener('keydown', (event) => {  // arrow function keeps global scope - otherwise need to bind this to that
-            console.log(event.key)
-            // console.log(this.player1)
-            if (event.key === 'a') {
-              this.player1.y = Math.max(0, this.player1.y - this.player1.speed)
-            }
-            else if (event.key === 'z') {
-              this.player1.y = Math.min(this.height - this.player1.height, this.player1.y + this.player1.speed)
-            }
-            else {
-              event.preventDefault()
-            }
-        })
 
-        // event listener for Player2 up and down paddle movement
-      document.addEventListener('keydown', (event) => {  
-        console.log(event.key)
-        console.log(this.player2)
-        if (event.key === 'ArrowUp') {
-          this.player2.y = Math.max(0, this.player2.y - this.player2.speed)
-        }
-        else if (event.key === 'ArrowDown') {
-          this.player2.y = Math.min(this.height - this.player2.height, this.player2.y + this.player2.speed)
-        }
-    })
+     
+      // OPTION B - NULL
+      // onkeydown = onkeyup = event => {
+      //   // console.log("key pressed is", event.key)
+      //   // this.keyMap1.push(event.key) = event.type
+      //   this.keyMap1[event.key] = event.type === 'keydown'
+      //   // console.log(this.keyMap)
+      //   console.log("keyMap 1:", this.keyMap1[event.key])
+      // //   if (this.keyMap1['a']) {
+      // //     this.player1.y = Math.max(0, this.player1.y - this.player1.speed)
+      // //   }
+      // //   else if (this.keyMap1['z']) {
+      // //     this.player1.y = Math.min(this.height - this.player1.height, this.player1.y + this.player1.speed)
+      // //   }
+      // }
 
-      
+      // OPTION B - ONLY last player instance works
+      // this.keyMap = {}
+      // onkeydown = onkeyup = event => {
+      //   // console.log("key pressed is", event.key)
+      //   // this.keyMap.push(event.key) = event.type
+      //   this.keyMap[event.key] = event.type === 'keydown'
+      //   // console.log(this.keyMap)
+      //   console.log("keyMap", this.keyMap[event.key])
+      //   if (this.keyMap['a'] || this.keyMap['z'] || this.keyMap['ArrowUp'] || this.keyMap['ArrowDown']) {
+      //     this.player2.y = Math.max(0, this.player2.y - this.player2.speed)
+      //   }
+      //   else if (this.keyMap['ArrowDown']) {
+      //     this.player2.y = Math.min(this.height - this.player2.height, this.player2.y + this.player2.speed)
+      //   }
+      // }
 
+      //  OPTION C - functions but paddles still interfere
+      // // event listener for Player1 up and down paddle movement
+      // document.addEventListener('keydown', (event) => {  // arrow function keeps global scope - otherwise need to bind this to that
+      //       // console.log(event.key)
+      //       if (event.key === 'a') {
+      //         this.player1.y = Math.max(0, this.player1.y - this.player1.speed)
+      //       }
+      //       else if (event.key === 'z') {
+      //         this.player1.y = Math.min(this.height - this.player1.height, this.player1.y + this.player1.speed)
+      //       }
+      //   })
 
+      // OPTION C
+    //     // event listener for Player2 up and down paddle movement
+    //   document.addEventListener('keydown', (event) => {  
+    //     console.log(event.key)
+    //     console.log(this.player2)
+    //     if (event.key === 'ArrowUp') {
+    //       this.player2.y = Math.max(0, this.player2.y - this.player2.speed)
+    //     }
+    //     else if (event.key === 'ArrowDown') {
+    //       this.player2.y = Math.min(this.height - this.player2.height, this.player2.y + this.player2.speed)
+    //     }
+    // })
+
+    
 
   }
+
+
 
   render() {
     // pause game
