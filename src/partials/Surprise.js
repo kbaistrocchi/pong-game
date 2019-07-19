@@ -14,14 +14,36 @@ import {SVG_NS} from '../settings'
 // 				<!-- <polygon points = "0,8 20,8 4,20 10,0 16,20" fill = "red"/>
 // 			 </g> -->
 
-export default class Surprise {
+export default class Star {
     constructor(x, y) {
         this.x = x
         this.y = y
+
+        this.starLocation()
     }
 
-    // surpriseLocation() {
-    //     this.x = Math.random()
+    // randomize star location
+    starLocation() {
+        this.x = Math.random() * (512 - 20)
+        // console.log("star x", this.x)
+        this.y = Math.random() * (256 - 20)
+        // console.log("star y", this.y)
+    }
+    
+    // starCoordinates(x, y) {
+    //     let starX = x
+    //     let StarY = y
+    //     return [starX, starY]
+    // }
+    // delete
+    // // get coordinates of paddles
+    // coordinates(x, y, width, height) {
+    //     // get left  and right x position of ONE paddle
+    //     let leftX = x
+    //     let rightX = x + width
+    //     let topY = y
+    //     let bottomY = y + height
+    //     return [leftX, rightX, topY, bottomY]
     // }
 
     render(svg) {

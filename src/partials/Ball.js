@@ -101,14 +101,40 @@ export default class Ball {
     }
 
 
-    render(svg, player1, player2) {
+    // Star Collision
+    starCollision(star) {
+        // this.x and this.y are ball coordinates
+        // need star coordinates
+        let starArea = [star.x, star.y]
+        [star.x, star.y] = starArea
+        console.log('ball x', this.x)
+        console.log('ball y', this.y)
+        console.log('star x', star.x)
+        console.log('star y', star.y)
+        if (
+            (this.x >= star.x - this.radius)
+            && (this.x <= star.x + 20 + this.radius)
+            && (this.y >= star.y - this.radius)
+            && (this.y <= star.y + 20 + this.radius)
+            ) {
+                console.log("direct hit!")
+                this.ping4.play()
+                this.vx = 0
+                this.vy = 0
+            }
+        
+    }
+
+
+    render(svg, player1, player2, star) {
         this.x += this.vx
         this.y += this.vy 
 
         // add in wallCollision() because always on loop and always checking to see
-        // if the ball has his the wall
+        // if the ball has hit the wall
         this.wallCollision()
         this.paddleCollision(player1, player2)
+        this.starCollision(star)
 
       
 

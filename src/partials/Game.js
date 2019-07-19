@@ -3,7 +3,7 @@ import Board from './Board'
 import Paddle from './Paddles'
 import Ball from './Ball'
 import Score from './Score'
-import Surprise from './Surprise'
+import Star from './Surprise'
 
 export default class Game {
   constructor(element, width, height) {
@@ -59,7 +59,7 @@ export default class Game {
       this.xPosition = 150
       this.yPosition = 150
       // create instance of star
-      this.surprise = new Surprise (this.xPosition, this.yPosition)
+      this.star = new Star (this.xPosition, this.yPosition)
     
 
       // location in html element to append all game items to
@@ -175,15 +175,16 @@ export default class Game {
 
 
     // render the ball ... add ball arguments player1 and 2
-    this.ball.render(svg, this.player1, this.player2)
+    this.ball.render(svg, this.player1, this.player2, this.star)
     // console.log(this.player1)
 
     // render score boards
     this.score1.render(svg, this.player1.score)
     this.score2.render(svg, this.player2.score)
 
-    // render the surprise!
-    this.surprise.render(svg)
+    // render the star!
+    this.star.render(svg)
+    
     
 
   
