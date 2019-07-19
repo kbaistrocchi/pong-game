@@ -101,10 +101,24 @@ export default class Ball {
     }
 
     minusGoal(player1, player2) {
+        let winningScore = Math.max(player1.score, player2.score)
+        console.log(winningScore)
         console.log("P1", player1.score)
         console.log("P2", player2.score)
-        // player.score = player.score - 2
-        // this.reset()
+        if (player1.score === player2.score) {
+            console.log("tie game, no change")
+            return
+        }
+        else if (winningScore === player1.score) {
+            console.log("P1 lost 2 pts")
+            player1.score = player1.score - 2
+            return
+        }
+        else if (winningScore === player2.score) {
+            console.log("P1 lost 2 pts")
+            player2.score = player2.score - 2
+            return
+        }
     }
 
 
@@ -126,10 +140,12 @@ export default class Ball {
             ) {
                 console.log("direct hit!")
                 this.ping4.play()
-                this.minusGoal(player1, player2)
                 this.vx = 0
                 this.vy = 0
-                // run function to decrease score
+                this.minusGoal(player1, player2)
+                this.reset()
+                star.starLocation()
+                
             }
         
     }
