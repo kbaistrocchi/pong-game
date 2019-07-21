@@ -33,12 +33,11 @@ export default class Star {
     }
 
     setColour() {
-        const colour = ['#ffc107', 'coral', 'aqua']
-        let randomIndex = Math.floor(Math.random() * 2)
+        const colour = ['#ffc107', 'hotpink', 'aqua']
+        let randomIndex = Math.floor(Math.random() * 3)
+        console.log(randomIndex)
         this.colour = colour[randomIndex]
     }
-
-    
 
     
 

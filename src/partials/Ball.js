@@ -108,29 +108,44 @@ export default class Ball {
             && (this.y <= star.y + 20 + this.radius)
             ) {
                 console.log("direct hit!")
+                this.vx = 0
+                this.vy = 0 
                 this.ping4.play()
-                
                 let scoreDifference = Math.abs(player1.score - player2.score)
                 let winningScore = Math.max(player1.score, player2.score)
-                if (scoreDifference >= 2 && scoreDifference < 4) {
-                    this.vx = 0
-                    this.vy = 0 
-                    this.minusGoal(player1, player2)
-                    this.reset()
-                    star.starLocation()
-                  }
-                else if (scoreDifference < 2) {
-                    if (winningScore === player1.score) {
-                        while (this.x > 256) {
-                            this.radius = 16
+                setTimeout(this.reset(), 2000)
+                setTimeout(star.starLocation(), 2000)
+                setTimeout(star.setColour(), 2000)
+                this.radius = 8
+                player1.height = 56
+                player2.height = 56
+
+                if (star.colour === '#ffc107') {
+                    this.minusGoal(player1, player2) 
+                }
+                else if (star.colour === 'hotpink') {
+                    this.radius = 16 
+                }
+                else if (star.colour === 'aqua') {
+                   if (scoreDifference > 0) {
+                        if (winningScore === player1.score) {
+                        player1.height = 28
                         }
-                    }
-                    else if (winningScore === player2.score) {
-                        while (this.x <= 256) {
-                            this.radius = 16
+                        else if (winningScore === player2.score) {
+                           player2.height = 28
                         }
-                    }  
-                }   
+                    } 
+                    else { 
+                        // change text to say tie game 
+                    } 
+                   
+                    
+                   
+
+                }
+                    
+                    
+                       
             }
         
     }
@@ -138,12 +153,13 @@ export default class Ball {
 
     minusGoal(player1, player2) {
         let winningScore = Math.max(player1.score, player2.score)
-        console.log(winningScore)
-        console.log("P1", player1.score)
-        console.log("P2", player2.score)
-        // if (player1.score === player2.score) {
-        //     return
-        // }
+        // console.log(winningScore)
+        // console.log("P1", player1.score)
+        // console.log("P2", player2.score)
+        if (player1.score === player2.score) {
+            // insert text saying "tie game, no changes"
+            return
+        }
         if (winningScore === player1.score) {
             player1.score = player1.score - 2
             return
