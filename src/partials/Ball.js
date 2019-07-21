@@ -14,6 +14,7 @@ export default class Ball {
         this.ping2 = new Audio(pingSound2)
         this.ping3 = new Audio(pingSound3)
         this.ping4 = new Audio(pingSound4)
+        this.notice = document.getElementById('notice') 
         
         this.reset()
     }
@@ -98,8 +99,6 @@ export default class Ball {
         this.reset()
     }
 
-
-    // Star Collision
     starCollision(star, player1, player2) {
         if (
             (this.x >= star.x - this.radius)
@@ -108,19 +107,17 @@ export default class Ball {
             && (this.y <= star.y + 20 + this.radius)
             ) {
                 console.log("direct hit!")
-                this.vx = 0
-                this.vy = 0 
+                this.clearNotice()
                 this.ping4.play()
                 let scoreDifference = Math.abs(player1.score - player2.score)
                 let winningScore = Math.max(player1.score, player2.score)
-                setTimeout(this.reset(), 2000)
-                setTimeout(star.starLocation(), 2000)
-                setTimeout(star.setColour(), 2000)
+                
                 this.radius = 8
                 player1.height = 56
                 player2.height = 56
+                console.log(star.colour)
 
-                if (star.colour === '#ffc107') {
+                if (star.colour === 'yellow') {
                     this.minusGoal(player1, player2) 
                 }
                 else if (star.colour === 'hotpink') {
@@ -136,16 +133,12 @@ export default class Ball {
                         }
                     } 
                     else { 
-                        // change text to say tie game 
+                        this.tieGame() 
                     } 
-                   
-                    
-                   
-
                 }
-                    
-                    
-                       
+                setTimeout(this.reset(), 2000)
+                setTimeout(star.starLocation(), 2000)
+                setTimeout(star.setColour(), 2000)       
             }
         
     }
@@ -157,7 +150,7 @@ export default class Ball {
         // console.log("P1", player1.score)
         // console.log("P2", player2.score)
         if (player1.score === player2.score) {
-            // insert text saying "tie game, no changes"
+            this.tieGame()
             return
         }
         if (winningScore === player1.score) {
@@ -168,6 +161,16 @@ export default class Ball {
             player2.score = player2.score - 2
             return
         }
+    }
+    
+
+    tieGame() {
+        this.notice.innerHTML = "it's a time game, so nothing happened"
+        this.notice.style.textAlign = 'center'
+    }
+
+    clearNotice() {
+        this.notice.innerHTML = ""
     }
 
 
