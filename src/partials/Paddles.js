@@ -8,39 +8,12 @@ export default class Paddle {
         this.height = height
         this.x = x
         this.y = y
-        this.speed = 10 // moves 10 pixels per click
+        this.speed = 10 
         this.score = 0
 
-
-        
-        // 
-        // this.keyMap = {}
-        // document.addEventListener('keydown', (event) => {
-    
-        //     onkeydown = onkeyup = event => {
-        //     // console.log("key pressed is", event.key)
-        //     // this.keyMap.push(event.key) = event.type
-        //     this.keyMap[event.key] = event.type === 'keydown'
-        //     // console.log(this.keyMap)
-        //     console.log("keyMap", this.keyMap[event.key])
-        //     console.log(event.key)
-        //     if (this.keyMap['a'] || this.keyMap['z'] || this.keyMap['ArrowUp'] || this.keyMap['ArrowDown']) {
-        //         switch(event.key) {
-        //             case up: this.y = Math.max(0, this.y - this.speed) //Math.max picks the largest of the numbers
-        //             console.log(event.key)
-        //             break
-        //             case down: this.y = Math.min(this.boardHeight - this.height, this.y + this.speed)
-        //             break
-        //         } 
-        //     }
-        //   }
-        // })
-
-        // OPTION A
-        document.addEventListener('keydown', (event) => {  // arrow function keeps global scope - otherwise need to bind this to that
-            console.log(event)
+        document.addEventListener('keydown', (event) => { 
             switch(event.key) {
-                case up: this.y = Math.max(0, this.y - this.speed) //Math.max picks the largest of the numbers
+                case up: this.y = Math.max(0, this.y - this.speed)
                 break
                 case down: this.y = Math.min(this.boardHeight - this.height, this.y + this.speed)
                 break
@@ -49,12 +22,8 @@ export default class Paddle {
 
     }
 
-    
-
-
     // get coordinates of paddles
     coordinates(x, y, width, height) {
-        // get left  and right x position of ONE paddle
         let leftX = x
         let rightX = x + width
         let topY = y

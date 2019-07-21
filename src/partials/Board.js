@@ -6,14 +6,12 @@ export default class Board {
         this.height = height
     }
 
-    // create the pong board
     render(svg) {
     let rect = document.createElementNS(SVG_NS, 'rect')
     rect.setAttributeNS(null, 'fill', '#353535')
     rect.setAttributeNS(null, 'width', this.width)
     rect.setAttributeNS(null, 'height', this.height)
-    
-    // line in middle of board
+
     let line = document.createElementNS(SVG_NS, 'line')
     line.setAttributeNS(null, 'stroke', '#fff')
     line.setAttributeNS(null, 'stroke-width', '4')
@@ -23,7 +21,6 @@ export default class Board {
     line.setAttributeNS(null, 'x2', (this.width/2))
     line.setAttributeNS(null, 'y2', (this.height))
 
-    // append board and line to svg
     svg.appendChild(rect)
     svg.appendChild(line)
     

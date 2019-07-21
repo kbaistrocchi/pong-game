@@ -18,7 +18,9 @@ Once you run the start command you can play the game at (http://localhost:3000).
 
 Left player: use `a` to move paddle up and `z` to move paddle down.
 
-Right player: use `up arrow` key to move paddle up and `down arrow` key to move paddle down
+Right player: use `up arrow` key to move paddle up and `down arrow` key to move paddle down.
+
+Press the `spacebar` to pause the game.
 
 **Rules**
 
