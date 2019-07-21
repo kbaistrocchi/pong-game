@@ -23,7 +23,12 @@ Right player: use `up arrow` key to move paddle up and `down arrow` key to move 
 **Rules**
 
 To score, get the ball past your opponent's paddle.
-If the ball hits the yellow star, the winning player loses 2 points and the ball resets in the middle of the board. The star then relocates.
+
+If the ball hits a yellow star then winning player loses 2 points.
+If the ball hits a pink star then the ball gets bigger.
+If the ball hits a blue star then the winner's paddle shrinks.
+
+Ball and paddle sizes reset when the next star is hit by the ball.
 
 ### Personal Learnings
 
