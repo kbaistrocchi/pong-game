@@ -56,10 +56,8 @@ export default class Game {
 
 
 
-      this.xPosition = 150
-      this.yPosition = 150
       // create instance of star
-      this.star = new Star (this.xPosition, this.yPosition)
+      this.star = new Star ()
     
 
       // location in html element to append all game items to
@@ -184,6 +182,7 @@ export default class Game {
 
     // render the star!
     this.star.render(svg)
+    
     
     
 

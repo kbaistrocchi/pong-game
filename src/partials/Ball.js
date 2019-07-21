@@ -98,24 +98,6 @@ export default class Ball {
         this.reset()
     }
 
-    minusGoal(player1, player2) {
-        let winningScore = Math.max(player1.score, player2.score)
-        console.log(winningScore)
-        console.log("P1", player1.score)
-        console.log("P2", player2.score)
-        if (player1.score === player2.score) {
-            return
-        }
-        else if (winningScore === player1.score) {
-            player1.score = player1.score - 2
-            return
-        }
-        else if (winningScore === player2.score) {
-            player2.score = player2.score - 2
-            return
-        }
-    }
-
 
     // Star Collision
     starCollision(star, player1, player2) {
@@ -127,13 +109,49 @@ export default class Ball {
             ) {
                 console.log("direct hit!")
                 this.ping4.play()
-                this.vx = 0
-                this.vy = 0
-                setInterval((this.minusGoal(player1, player2)), 2000)
-                setInterval((this.reset()), 3000)
-                star.starLocation()
+                
+                let scoreDifference = Math.abs(player1.score - player2.score)
+                let winningScore = Math.max(player1.score, player2.score)
+                if (scoreDifference >= 2 && scoreDifference < 4) {
+                    this.vx = 0
+                    this.vy = 0 
+                    this.minusGoal(player1, player2)
+                    this.reset()
+                    star.starLocation()
+                  }
+                else if (scoreDifference < 2) {
+                    if (winningScore === player1.score) {
+                        while (this.x > 256) {
+                            this.radius = 16
+                        }
+                    }
+                    else if (winningScore === player2.score) {
+                        while (this.x <= 256) {
+                            this.radius = 16
+                        }
+                    }  
+                }   
             }
         
+    }
+
+
+    minusGoal(player1, player2) {
+        let winningScore = Math.max(player1.score, player2.score)
+        console.log(winningScore)
+        console.log("P1", player1.score)
+        console.log("P2", player2.score)
+        // if (player1.score === player2.score) {
+        //     return
+        // }
+        if (winningScore === player1.score) {
+            player1.score = player1.score - 2
+            return
+        }
+        else if (winningScore === player2.score) {
+            player2.score = player2.score - 2
+            return
+        }
     }
 
 

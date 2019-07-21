@@ -15,11 +15,13 @@ import {SVG_NS} from '../settings'
 // 			 </g> -->
 
 export default class Star {
-    constructor(x, y) {
+    constructor(x, y, colour) {
         this.x = x
         this.y = y
+        this.colour = colour
 
         this.starLocation()
+        this.setColour()
     }
 
     // randomize star location
@@ -29,28 +31,22 @@ export default class Star {
         this.y = Math.random() * (256 - 20)
         // console.log("star y", this.y)
     }
+
+    setColour() {
+        const colour = ['#ffc107', 'coral', 'aqua']
+        let randomIndex = Math.floor(Math.random() * 2)
+        this.colour = colour[randomIndex]
+    }
+
     
-    // starCoordinates(x, y) {
-    //     let starX = x
-    //     let StarY = y
-    //     return [starX, starY]
-    // }
-    // delete
-    // // get coordinates of paddles
-    // coordinates(x, y, width, height) {
-    //     // get left  and right x position of ONE paddle
-    //     let leftX = x
-    //     let rightX = x + width
-    //     let topY = y
-    //     let bottomY = y + height
-    //     return [leftX, rightX, topY, bottomY]
-    // }
+
+    
 
     render(svg) {
         let group = document.createElementNS(SVG_NS, 'g')
         group.setAttributeNS(null, 'transform', `translate(${this.x}, ${this.y})`)
         let star = document.createElementNS(SVG_NS, 'polygon')
-        star.setAttributeNS(null, 'fill', 'yellow')
+        star.setAttributeNS(null, 'fill', this.colour)
         star.setAttributeNS(null, 'points', "0,8 20,8 4,20 10,0 16,20")
         svg.appendChild(group)
         group.appendChild(star)
